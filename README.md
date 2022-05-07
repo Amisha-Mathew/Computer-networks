@@ -10,6 +10,23 @@ accessed by employees based on IP and mac-address on a LAN network by analyzing 
 packets. Sniffer is combined with port mirroring feature on a switch to achieve the solution and
 this is established using cisco packet tracer.
 
+In the pkt file, open the command prompt at PC-0 and enter the commands:
+ping 192.168.0.11 (pinging PC-1)
+arp -a
+
+and mention filters as ARP, ICMP in the sniffer.
+The ARP packets are seen.
+
+Now go to the switch and configure it by executing the following commands in the CLI:
+> en
+> conf t
+> monitor session 1 source interface fa0/1
+> monitor session 1 source interface fa0/2
+> monitor session 1 destination interface fa0/24
+> end
+
+ping PC-1 again from the command prompt of PC-0 and the ICMP packets are now seen.
+
 2. Web Server monitoring techniques:
 
 An organization has deployed a Windows based web server on its network. The network
